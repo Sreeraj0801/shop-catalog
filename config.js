@@ -1,4 +1,4 @@
 const config = {
   itemsToShowInitially: 5,
-  locationLink: "https://goo.gl/maps/YourMapLinkHere",
+  locationLink: "https://maps.app.goo.gl/ZnyADxYtZDdkF7gm6",
 };
