@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Catalog</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header id="header">
+      <div class="settings-bar">
+        <select id="langSelect" onchange="loadLanguage(this.value)">
+          <option value="en">English</option>
+          <option value="ml">മലയാളം</option>
+          <option value="hi">हिंदी</option>
+          <option value="ta">தமிழ்</option>
+        </select>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+
+      <div id="header-content" class="header-content"></div>
+    </header>
+
+    <div class="sticky-controls">
+      <div class="search-wrapper">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" id="searchInput" />
+      </div>
+
+      <div class="tabs-wrapper" id="tabsContainer"></div>
+    </div>
+
+    <div class="map-container" id="map-section"></div>
+
+    <main id="app"></main>
+
+    <footer id="footer"></footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

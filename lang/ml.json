@@ -1,0 +1,36 @@
+{
+  "shopName": "ആർ കെ ഷോപ്പ്",
+  "shopTagline": "പലചരക്ക്, സ്റ്റേഷനറി, പച്ചക്കറികൾ",
+  "searchPlaceholder": "ഉൽപ്പന്നങ്ങൾ തിരയുക...",
+  "tabsAll": "എല്ലാം",
+  "locationLabel": "സ്ഥലം",
+  "locationAction": "ഷോപ്പിലേക്ക് പോകാം",
+  "footerTitle": "സന്ദർശിച്ചതിന് നന്ദി!",
+  "footerMessage": "വീണ്ടും കാണാം.",
+  "showMore": "കൂടുതൽ കാണുക +",
+  "showLess": "ചുരുക്കി കാണുക -",
+  "categories": [
+    {
+      "title": "പച്ചക്കറികൾ",
+      "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=500&q=60",
+      "items": [
+        "തക്കാളി",
+        "സവാള",
+        "ഉരുളക്കിഴങ്ങ്",
+        "പച്ചമുളക്",
+        "ക്യാരറ്റ്",
+        "ബീൻസ്"
+      ]
+    },
+    {
+      "title": "പലചരക്ക്",
+      "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=60",
+      "items": ["അരി", "ഗോതമ്പ് പൊടി", "എണ്ണ", "പഞ്ചസാര", "ഉപ്പ്"]
+    },
+    {
+      "title": "സ്റ്റേഷനറി",
+      "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=500&q=60",
+      "items": ["നോട്ട്ബുക്ക്", "പേന (നീല)", "പേന (കറുപ്പ്)", "പെൻസിൽ"]
+    }
+  ]
+}

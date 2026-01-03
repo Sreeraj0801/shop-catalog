@@ -1,0 +1,36 @@
+{
+  "shopName": "ஆர் கே ஷாப்",
+  "shopTagline": "மளிகை, எழுதுபொருள் & காய்கறிகள்",
+  "searchPlaceholder": "தேடு...",
+  "tabsAll": "அனைத்தும்",
+  "locationLabel": "இடம்",
+  "locationAction": "கடைக்குச் செல்",
+  "footerTitle": "நன்றி!",
+  "footerMessage": "மீண்டும் சந்திப்போம்.",
+  "showMore": "மேலும் +",
+  "showLess": "குறைவாக -",
+  "categories": [
+    {
+      "title": "காய்கறிகள்",
+      "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=500&q=60",
+      "items": [
+        "தக்காளி",
+        "வெங்காயம்",
+        "உருளைக்கிழங்கு",
+        "மிளகாய்",
+        "கேரட்",
+        "பீன்ஸ்"
+      ]
+    },
+    {
+      "title": "மளிகை",
+      "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=60",
+      "items": ["அரிசி", "கோதுமை மாவு", "எண்ணெய்", "சர்க்கரை", "உப்பு"]
+    },
+    {
+      "title": "எழுதுபொருள்",
+      "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=500&q=60",
+      "items": ["நோட்டு புத்தகம்", "பேனா (நீலம்)", "பேனா (கருப்பு)", "பென்சில்"]
+    }
+  ]
+}

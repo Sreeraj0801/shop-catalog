@@ -1,0 +1,29 @@
+{
+  "shopName": "आर के शॉप",
+  "shopTagline": "किराना, स्टेशनरी और सब्जियां",
+  "searchPlaceholder": "उत्पाद खोजें...",
+  "tabsAll": "सभी",
+  "locationLabel": "स्थान",
+  "locationAction": "दुकान पर जाएँ",
+  "footerTitle": "आने के लिए धन्यवाद!",
+  "footerMessage": "फिर मिलेंगे।",
+  "showMore": "और देखें +",
+  "showLess": "कम देखें -",
+  "categories": [
+    {
+      "title": "सब्जियां",
+      "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=500&q=60",
+      "items": ["टमाटर", "प्याज", "आलू", "हरी मिर्च", "गाजर", "बीन्स"]
+    },
+    {
+      "title": "किराना",
+      "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=60",
+      "items": ["चावल", "गेहूं का आटा", "तेल", "चीनी", "नमक"]
+    },
+    {
+      "title": "स्टेशनरी",
+      "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=500&q=60",
+      "items": ["नोटबुक", "पेन (नीला)", "पेन (काला)", "पेंसिल"]
+    }
+  ]
+}
