@@ -1,6 +1,15 @@
 let currentData = {};
-let currentLang = localStorage.getItem("shopLang") || "en";
-let currentTheme = localStorage.getItem("shopTheme") || "system";
+let currentLang = "en";
+try {
+  currentLang = localStorage.getItem("shopLang") || "en";
+} catch (e) {
+  console.warn("Local Storage access denied");
+}
+
+let currentTheme = "system";
+try {
+  currentTheme = localStorage.getItem("shopTheme") || "system";
+} catch (e) {}
 
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
@@ -10,36 +19,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadLanguage(currentLang);
 
-  document
-    .getElementById("searchInput")
-    .addEventListener("input", handleSearch);
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", handleSearch);
+  }
 });
 
 async function loadLanguage(langCode) {
   try {
-    const response = await fetch(`lang/${langCode}.json`);
+    const cacheBuster = new Date().getTime();
+    const response = await fetch(`lang/${langCode}.json?v=${cacheBuster}`);
 
-    if (!response.ok) throw new Error("Language file not found");
+    if (!response.ok) {
+      throw new Error(`File not found: lang/${langCode}.json`);
+    }
 
     currentData = await response.json();
     currentLang = langCode;
-    localStorage.setItem("shopLang", langCode);
+    try {
+      localStorage.setItem("shopLang", langCode);
+    } catch (e) {}
 
     renderAllContent();
   } catch (error) {
     console.error("Error loading language:", error);
+    showErrorOnScreen(`System Error: ${error.message}. Please refresh.`);
   }
 }
 
-function renderAllContent() {
-  document.getElementById("header-content").innerHTML = `
-        <h1><i class="fa-solid fa-store"></i> ${currentData.shopName}</h1>
-        <p>${currentData.shopTagline}</p>
+function showErrorOnScreen(msg) {
+  const app = document.getElementById("app");
+  app.innerHTML = `
+        <div style="background:#ffebee; color:#c62828; padding:20px; text-align:center; border-radius:10px; margin:20px;">
+            <h3>⚠️ User Alert</h3>
+            <p>${msg}</p>
+        </div>
     `;
+}
+function renderAllContent() {
+  const headerContent = document.getElementById("header-content");
+  if (headerContent) {
+    headerContent.innerHTML = `
+            <h1><i class="fa-solid fa-store"></i> ${currentData.shopName}</h1>
+            <p>${currentData.shopTagline}</p>
+        `;
+  }
 
-  document.getElementById("searchInput").placeholder =
-    currentData.searchPlaceholder;
-  document.getElementById("searchInput").value = "";
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.placeholder = currentData.searchPlaceholder;
+    searchInput.value = "";
+  }
 
   renderMap();
   renderTabs();
@@ -48,7 +78,10 @@ function renderAllContent() {
 }
 
 function renderMap() {
-  document.getElementById("map-section").innerHTML = `
+  const mapSection = document.getElementById("map-section");
+  if (!mapSection) return;
+
+  mapSection.innerHTML = `
         <a href="${config.locationLink}" target="_blank" class="map-pill">
             <div class="map-icon-box"><i class="fa-solid fa-map-location-dot"></i></div>
             <div class="map-info">
@@ -62,6 +95,7 @@ function renderMap() {
 
 function renderTabs() {
   const tabsContainer = document.getElementById("tabsContainer");
+  if (!tabsContainer) return;
   tabsContainer.innerHTML = "";
 
   const allTab = document.createElement("button");
@@ -70,18 +104,23 @@ function renderTabs() {
   allTab.onclick = () => filterCategory("All", allTab);
   tabsContainer.appendChild(allTab);
 
-  currentData.categories.forEach((cat) => {
-    const btn = document.createElement("button");
-    btn.className = "tab-btn";
-    btn.innerText = cat.title;
-    btn.onclick = () => filterCategory(cat.title, btn);
-    tabsContainer.appendChild(btn);
-  });
+  if (currentData.categories) {
+    currentData.categories.forEach((cat) => {
+      const btn = document.createElement("button");
+      btn.className = "tab-btn";
+      btn.innerText = cat.title;
+      btn.onclick = () => filterCategory(cat.title, btn);
+      tabsContainer.appendChild(btn);
+    });
+  }
 }
 
 function renderProducts() {
   const app = document.getElementById("app");
+  if (!app) return;
   app.innerHTML = "";
+
+  if (!currentData.categories) return;
 
   currentData.categories.forEach((cat) => {
     const card = document.createElement("div");
@@ -138,6 +177,7 @@ function renderProducts() {
 
 function renderFooter() {
   const footer = document.getElementById("footer");
+  if (!footer) return;
   footer.innerHTML = `
         <div class="footer-content">
             <div class="footer-main">
@@ -159,7 +199,8 @@ function filterCategory(categoryName, clickedBtn) {
     .querySelectorAll(".tab-btn")
     .forEach((btn) => btn.classList.remove("active"));
   clickedBtn.classList.add("active");
-  document.getElementById("searchInput").value = "";
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) searchInput.value = "";
 
   document.querySelectorAll(".category-card").forEach((card) => {
     const cardCategory = card.dataset.category;
@@ -226,17 +267,21 @@ function handleSearch(e) {
 }
 
 function initTheme() {
-  if (
-    currentTheme === "dark" ||
-    (currentTheme === "system" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.setAttribute("data-theme", "dark");
-    document.querySelector(".theme-toggle i").className = "fa-solid fa-sun";
-  } else {
-    document.documentElement.setAttribute("data-theme", "light");
-    document.querySelector(".theme-toggle i").className = "fa-solid fa-moon";
-  }
+  try {
+    if (
+      currentTheme === "dark" ||
+      (currentTheme === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      const toggle = document.querySelector(".theme-toggle i");
+      if (toggle) toggle.className = "fa-solid fa-sun";
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      const toggle = document.querySelector(".theme-toggle i");
+      if (toggle) toggle.className = "fa-solid fa-moon";
+    }
+  } catch (e) {}
 }
 
 function toggleTheme() {
@@ -245,8 +290,11 @@ function toggleTheme() {
   const newTheme = isDark ? "light" : "dark";
 
   html.setAttribute("data-theme", newTheme);
-  localStorage.setItem("shopTheme", newTheme);
-  document.querySelector(".theme-toggle i").className = isDark
-    ? "fa-solid fa-moon"
-    : "fa-solid fa-sun";
+  try {
+    localStorage.setItem("shopTheme", newTheme);
+  } catch (e) {}
+
+  const toggle = document.querySelector(".theme-toggle i");
+  if (toggle)
+    toggle.className = isDark ? "fa-solid fa-moon" : "fa-solid fa-sun";
 }
