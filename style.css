@@ -36,10 +36,20 @@ body {
 }
 
 header {
-  background-color: var(--primary-color);
+  background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)),
+    url("public/shop image.jpeg");
   color: white;
   padding: 1rem 1rem 1.5rem;
   text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 1rem 1rem 2.5rem;
+  text-align: center;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  position: relative;
 }
 
 .settings-bar {
